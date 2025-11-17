@@ -42,7 +42,7 @@ contract MintableERC20 is IERC20WithPermit, ERC20 {
     bytes32 s
   ) external override {
     require(owner != address(0), 'INVALID_OWNER');
-    
+
     require(block.timestamp <= deadline, 'INVALID_EXPIRATION');
     uint256 currentValidNonce = _nonces[owner];
     bytes32 digest = keccak256(

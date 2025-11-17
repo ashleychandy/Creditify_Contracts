@@ -7,7 +7,11 @@ contract CreditifyV3TokensBatch is CreditifyV3TokensProcedure {
   TokensReport internal _tokensReport;
 
   constructor(address poolProxy, address rewardsControllerProxy, address treasury) {
-    _tokensReport = _deployCreditifyV3TokensImplementations(poolProxy, rewardsControllerProxy, treasury);
+    _tokensReport = _deployCreditifyV3TokensImplementations(
+      poolProxy,
+      rewardsControllerProxy,
+      treasury
+    );
   }
 
   function getTokensReport() external view returns (TokensReport memory) {

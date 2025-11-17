@@ -175,12 +175,7 @@ library SupplyLogic {
 
       if (params.scaledBalanceToBefore == 0) {
         DataTypes.UserConfigurationMap storage toConfig = usersConfig[params.to];
-        if (
-          ValidationLogic.validateAutomaticUseAsCollateral(
-            toConfig,
-            reserve.configuration
-          )
-        ) {
+        if (ValidationLogic.validateAutomaticUseAsCollateral(toConfig, reserve.configuration)) {
           toConfig.setUsingAsCollateral(reserveId, params.asset, params.to, true);
         }
       }
@@ -204,17 +199,13 @@ library SupplyLogic {
     if (useAsCollateral == userConfig.isUsingAsCollateral(reserve.id)) return;
 
     if (useAsCollateral) {
-      
       require(
         IAToken(reserve.aTokenAddress).scaledBalanceOf(user) != 0,
         Errors.UnderlyingBalanceZero()
       );
 
       require(
-        ValidationLogic.validateUseAsCollateral(
-          userConfig,
-          reserveConfigCached
-        ),
+        ValidationLogic.validateUseAsCollateral(userConfig, reserveConfigCached),
         Errors.LtvValidationFailed()
       );
 

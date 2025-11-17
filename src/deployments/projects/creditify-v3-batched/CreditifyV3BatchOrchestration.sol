@@ -31,6 +31,20 @@ library CreditifyV3BatchOrchestration {
     MarketReport report;
   }
 
+  struct DeployCreditifyV3VariablesWithoutConfigEngine {
+    CreditifyV3SetupBatch setupBatch;
+    InitialReport initialReport;
+    CreditifyV3GettersBatchOne.GettersReportBatchOne gettersReport1;
+    PoolReport poolReport;
+    PeripheryReport peripheryReport;
+    MiscReport miscReport;
+    SetupReport setupReport;
+    CreditifyV3GettersBatchTwo.GettersReportBatchTwo gettersReport2;
+    CreditifyV3TokensBatch.TokensReport tokensReport;
+    StaticATokenReport staticATokenReport;
+    MarketReport report;
+  }
+
   function deployCreditifyV3(
     address deployer,
     Roles memory roles,
@@ -65,9 +79,7 @@ library CreditifyV3BatchOrchestration {
       address(variables.setupBatch)
     );
 
-    variables.miscReport = _deployMisc(
-      variables.initialReport.poolAddressesProvider
-    );
+    variables.miscReport = _deployMisc(variables.initialReport.poolAddressesProvider);
     variables.miscReport.defaultInterestRateStrategy = variables.initialReport.interestRateStrategy;
 
     variables.setupReport = variables.setupBatch.setupCreditifyV3Market(
@@ -126,13 +138,105 @@ library CreditifyV3BatchOrchestration {
     return variables.report;
   }
 
+  function deployCreditifyV3WithoutConfigEngine(
+    address deployer,
+    Roles memory roles,
+    MarketConfig memory config,
+    DeployFlags memory flags,
+    MarketReport memory deployedContracts
+  ) internal returns (MarketReport memory) {
+    DeployCreditifyV3VariablesWithoutConfigEngine memory variables;
+
+    (variables.setupBatch, variables.initialReport) = _deploySetupContract(
+      deployer,
+      roles,
+      config,
+      deployedContracts
+    );
+
+    variables.gettersReport1 = _deployGettersBatch1(
+      config.networkBaseTokenPriceInUsdProxyAggregator,
+      config.marketReferenceCurrencyPriceInUsdProxyAggregator
+    );
+
+    variables.poolReport = _deployPoolImplementations(
+      variables.initialReport.poolAddressesProvider,
+      variables.initialReport.interestRateStrategy,
+      flags
+    );
+
+    variables.peripheryReport = _deployPeripherals(
+      roles,
+      config,
+      variables.initialReport.poolAddressesProvider,
+      address(variables.setupBatch)
+    );
+
+    variables.miscReport = _deployMisc(variables.initialReport.poolAddressesProvider);
+    variables.miscReport.defaultInterestRateStrategy = variables.initialReport.interestRateStrategy;
+
+    variables.setupReport = variables.setupBatch.setupCreditifyV3Market(
+      roles,
+      config,
+      variables.poolReport.poolImplementation,
+      variables.poolReport.poolConfiguratorImplementation,
+      variables.peripheryReport.creditifyOracle,
+      variables.peripheryReport.rewardsControllerImplementation
+    );
+
+    variables.gettersReport2 = _deployGettersBatch2(
+      variables.setupReport.poolProxy,
+      roles.poolAdmin,
+      config.wrappedNativeToken,
+      variables.initialReport.poolAddressesProvider
+    );
+
+    variables.setupBatch.setProtocolDataProvider(variables.gettersReport2.protocolDataProvider);
+
+    variables.setupBatch.transferMarketOwnership(roles);
+
+    variables.tokensReport = _deployTokens(
+      variables.setupReport.poolProxy,
+      variables.setupReport.rewardsControllerProxy,
+      variables.peripheryReport
+    );
+
+    // Skip config engine deployment - will be done separately
+
+    variables.staticATokenReport = _deployHelpersBatch2(
+      variables.setupReport.poolProxy,
+      variables.setupReport.rewardsControllerProxy,
+      roles.poolAdmin
+    );
+
+    variables.report = _generateMarketReportWithoutConfigEngine(
+      variables.initialReport,
+      variables.gettersReport1,
+      variables.gettersReport2,
+      variables.poolReport,
+      variables.peripheryReport,
+      variables.miscReport,
+      variables.setupReport,
+      variables.tokensReport,
+      variables.staticATokenReport
+    );
+    variables.setupBatch.setMarketReport(variables.report);
+
+    return variables.report;
+  }
+
   function _deploySetupContract(
     address deployer,
     Roles memory roles,
     MarketConfig memory config,
     MarketReport memory deployedContracts
   ) internal returns (CreditifyV3SetupBatch, InitialReport memory) {
-    CreditifyV3SetupBatch setupBatch = new CreditifyV3SetupBatch(deployer, roles, config, deployedContracts);
+    CreditifyV3SetupBatch setupBatch = new CreditifyV3SetupBatch(
+      deployer,
+      roles,
+      config,
+      deployedContracts
+    );
     return (setupBatch, setupBatch.getInitialReport());
   }
 
@@ -213,12 +317,8 @@ library CreditifyV3BatchOrchestration {
     return helpersBatchTwo.staticATokenReport();
   }
 
-  function _deployMisc(
-    address poolAddressesProvider
-  ) internal returns (MiscReport memory) {
-    CreditifyV3MiscBatch miscBatch = new CreditifyV3MiscBatch(
-      poolAddressesProvider
-    );
+  function _deployMisc(address poolAddressesProvider) internal returns (MiscReport memory) {
+    CreditifyV3MiscBatch miscBatch = new CreditifyV3MiscBatch(poolAddressesProvider);
 
     return miscBatch.getMiscReport();
   }
@@ -228,7 +328,9 @@ library CreditifyV3BatchOrchestration {
     address interestRateStrategy,
     DeployFlags memory flags
   ) internal returns (PoolReport memory) {
-    IPoolReport poolBatch = IPoolReport(new CreditifyV3PoolBatch(poolAddressesProvider, interestRateStrategy));
+    IPoolReport poolBatch = IPoolReport(
+      new CreditifyV3PoolBatch(poolAddressesProvider, interestRateStrategy)
+    );
 
     return poolBatch.getPoolReport();
   }
@@ -305,6 +407,53 @@ library CreditifyV3BatchOrchestration {
     report.variableDebtToken = tokensReport.variableDebtToken;
     report.defaultInterestRateStrategy = miscReport.defaultInterestRateStrategy;
     report.configEngine = configEngineReport.configEngine;
+    report.staticATokenFactoryImplementation = staticATokenReport.staticATokenFactoryImplementation;
+    report.staticATokenFactoryProxy = staticATokenReport.staticATokenFactoryProxy;
+    report.staticATokenImplementation = staticATokenReport.staticATokenImplementation;
+    report.transparentProxyFactory = staticATokenReport.transparentProxyFactory;
+    report.revenueSplitter = peripheryReport.revenueSplitter;
+
+    return report;
+  }
+
+  function _generateMarketReportWithoutConfigEngine(
+    InitialReport memory initialReport,
+    CreditifyV3GettersBatchOne.GettersReportBatchOne memory gettersReportOne,
+    CreditifyV3GettersBatchTwo.GettersReportBatchTwo memory gettersReportTwo,
+    PoolReport memory poolReport,
+    PeripheryReport memory peripheryReport,
+    MiscReport memory miscReport,
+    SetupReport memory setupReport,
+    CreditifyV3TokensBatch.TokensReport memory tokensReport,
+    StaticATokenReport memory staticATokenReport
+  ) internal pure returns (MarketReport memory) {
+    MarketReport memory report;
+
+    report.poolAddressesProvider = initialReport.poolAddressesProvider;
+    report.poolAddressesProviderRegistry = initialReport.poolAddressesProviderRegistry;
+    report.emissionManager = peripheryReport.emissionManager;
+    report.rewardsControllerImplementation = peripheryReport.rewardsControllerImplementation;
+    report.walletBalanceProvider = gettersReportOne.walletBalanceProvider;
+    report.uiIncentiveDataProvider = gettersReportOne.uiIncentiveDataProvider;
+    report.protocolDataProvider = gettersReportTwo.protocolDataProvider;
+    report.uiPoolDataProvider = gettersReportOne.uiPoolDataProvider;
+    report.poolImplementation = poolReport.poolImplementation;
+    report.wrappedTokenGateway = gettersReportTwo.wrappedTokenGateway;
+    report.poolConfiguratorImplementation = poolReport.poolConfiguratorImplementation;
+    report.creditifyOracle = peripheryReport.creditifyOracle;
+    report.treasuryImplementation = peripheryReport.treasuryImplementation;
+    report.treasury = peripheryReport.treasury;
+    report.dustBin = peripheryReport.dustBin;
+    report.emptyImplementation = peripheryReport.emptyImplementation;
+    report.poolProxy = setupReport.poolProxy;
+    report.poolConfiguratorProxy = setupReport.poolConfiguratorProxy;
+    report.rewardsControllerProxy = setupReport.rewardsControllerProxy;
+    report.aclManager = setupReport.aclManager;
+    report.aToken = tokensReport.aToken;
+    report.variableDebtToken = tokensReport.variableDebtToken;
+    report.defaultInterestRateStrategy = miscReport.defaultInterestRateStrategy;
+    // Skip config engine - will be deployed separately
+    report.configEngine = address(0);
     report.staticATokenFactoryImplementation = staticATokenReport.staticATokenFactoryImplementation;
     report.staticATokenFactoryProxy = staticATokenReport.staticATokenFactoryProxy;
     report.staticATokenImplementation = staticATokenReport.staticATokenImplementation;

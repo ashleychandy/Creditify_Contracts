@@ -4,7 +4,6 @@ pragma solidity ^0.8.0;
 import {IPoolAddressesProvider} from './IPoolAddressesProvider.sol';
 
 interface IACLManager {
-  
   function ADDRESSES_PROVIDER() external view returns (IPoolAddressesProvider);
 
   function POOL_ADMIN_ROLE() external view returns (bytes32);

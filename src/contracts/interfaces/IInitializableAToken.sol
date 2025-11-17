@@ -5,7 +5,6 @@ import {ICreditifyIncentivesController} from './ICreditifyIncentivesController.s
 import {IPool} from './IPool.sol';
 
 interface IInitializableAToken {
-  
   event Initialized(
     address indexed underlyingAsset,
     address indexed pool,

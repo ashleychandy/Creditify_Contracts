@@ -5,7 +5,6 @@ import {IPoolAddressesProvider} from './IPoolAddressesProvider.sol';
 import {DataTypes} from '../protocol/libraries/types/DataTypes.sol';
 
 interface IPool {
-  
   event Supply(
     address indexed reserve,
     address user,

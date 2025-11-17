@@ -16,7 +16,6 @@ library WadRayMath {
   uint256 internal constant WAD_RAY_RATIO = 1e9;
 
   function wadMul(uint256 a, uint256 b) internal pure returns (uint256 c) {
-    
     assembly {
       if iszero(or(iszero(b), iszero(gt(a, div(sub(not(0), HALF_WAD), b))))) {
         revert(0, 0)
@@ -27,7 +26,6 @@ library WadRayMath {
   }
 
   function wadDiv(uint256 a, uint256 b) internal pure returns (uint256 c) {
-    
     assembly {
       if or(iszero(b), iszero(iszero(gt(a, div(sub(not(0), div(b, 2)), WAD))))) {
         revert(0, 0)
@@ -39,7 +37,6 @@ library WadRayMath {
 
   function rayMul(uint256 a, uint256 b) internal pure returns (uint256 c) {
     assembly {
-      
       if iszero(or(iszero(b), iszero(gt(a, div(sub(not(0), HALF_RAY), b))))) {
         revert(0, 0)
       }
@@ -49,7 +46,6 @@ library WadRayMath {
 
   function rayMulFloor(uint256 a, uint256 b) internal pure returns (uint256 c) {
     assembly {
-      
       if iszero(or(iszero(b), iszero(gt(a, div(not(0), b))))) {
         revert(0, 0)
       }
@@ -60,7 +56,6 @@ library WadRayMath {
 
   function rayMulCeil(uint256 a, uint256 b) internal pure returns (uint256 c) {
     assembly {
-      
       if iszero(or(iszero(b), iszero(gt(a, div(not(0), b))))) {
         revert(0, 0)
       }
@@ -72,7 +67,6 @@ library WadRayMath {
 
   function rayDiv(uint256 a, uint256 b) internal pure returns (uint256 c) {
     assembly {
-      
       if or(iszero(b), iszero(iszero(gt(a, div(sub(not(0), div(b, 2)), RAY))))) {
         revert(0, 0)
       }
@@ -82,7 +76,6 @@ library WadRayMath {
 
   function rayDivCeil(uint256 a, uint256 b) internal pure returns (uint256 c) {
     assembly {
-      
       if or(iszero(b), iszero(iszero(gt(a, div(not(0), RAY))))) {
         revert(0, 0)
       }
@@ -93,7 +86,6 @@ library WadRayMath {
 
   function rayDivFloor(uint256 a, uint256 b) internal pure returns (uint256 c) {
     assembly {
-      
       if or(iszero(b), iszero(iszero(gt(a, div(not(0), RAY))))) {
         revert(0, 0)
       }
@@ -112,7 +104,6 @@ library WadRayMath {
   }
 
   function wadToRay(uint256 a) internal pure returns (uint256 b) {
-    
     assembly {
       b := mul(a, WAD_RAY_RATIO)
 

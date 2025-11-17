@@ -18,7 +18,6 @@ interface IUiPoolDataProviderV3 {
     bool borrowingEnabled;
     bool isActive;
     bool isFrozen;
-    
     uint128 liquidityIndex;
     uint128 variableBorrowIndex;
     uint128 liquidityRate;
@@ -27,7 +26,6 @@ interface IUiPoolDataProviderV3 {
     address aTokenAddress;
     address variableDebtTokenAddress;
     address interestRateStrategyAddress;
-    
     uint256 availableLiquidity;
     uint256 totalScaledVariableDebt;
     uint256 priceInMarketReferenceCurrency;
@@ -36,17 +34,13 @@ interface IUiPoolDataProviderV3 {
     uint256 variableRateSlope2;
     uint256 baseVariableBorrowRate;
     uint256 optimalUsageRatio;
-    
     bool isPaused;
     uint128 accruedToTreasury;
-    
     uint256 debtCeiling;
     uint256 debtCeilingDecimals;
     uint256 borrowCap;
     uint256 supplyCap;
-    
     uint128 virtualUnderlyingBalance;
-    
     uint128 deficit;
   }
 
@@ -76,5 +70,4 @@ interface IUiPoolDataProviderV3 {
     IPoolAddressesProvider provider,
     address user
   ) external view returns (UserReserveData[] memory, uint8);
-
 }

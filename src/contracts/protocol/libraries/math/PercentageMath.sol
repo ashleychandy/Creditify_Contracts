@@ -2,13 +2,11 @@
 pragma solidity ^0.8.0;
 
 library PercentageMath {
-  
   uint256 internal constant PERCENTAGE_FACTOR = 1e4;
 
   uint256 internal constant HALF_PERCENTAGE_FACTOR = 0.5e4;
 
   function percentMul(uint256 value, uint256 percentage) internal pure returns (uint256 result) {
-    
     assembly {
       if iszero(
         or(
@@ -27,7 +25,6 @@ library PercentageMath {
     uint256 value,
     uint256 percentage
   ) internal pure returns (uint256 result) {
-    
     assembly {
       if iszero(or(iszero(percentage), iszero(gt(value, div(not(0), percentage))))) {
         revert(0, 0)
@@ -45,7 +42,6 @@ library PercentageMath {
     uint256 value,
     uint256 percentage
   ) internal pure returns (uint256 result) {
-    
     assembly {
       if iszero(or(iszero(percentage), iszero(gt(value, div(not(0), percentage))))) {
         revert(0, 0)
@@ -56,7 +52,6 @@ library PercentageMath {
   }
 
   function percentDiv(uint256 value, uint256 percentage) internal pure returns (uint256 result) {
-    
     assembly {
       if or(
         iszero(percentage),
@@ -73,7 +68,6 @@ library PercentageMath {
     uint256 value,
     uint256 percentage
   ) internal pure returns (uint256 result) {
-    
     assembly {
       if or(iszero(percentage), iszero(iszero(gt(value, div(not(0), PERCENTAGE_FACTOR))))) {
         revert(0, 0)

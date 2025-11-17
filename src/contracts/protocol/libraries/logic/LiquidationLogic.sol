@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
 
-
 import {IERC20} from '../../../dependencies/openzeppelin/contracts/IERC20.sol';
 import {SafeERC20} from '../../../dependencies/openzeppelin/contracts/SafeERC20.sol';
 import {PercentageMath} from '../../libraries/math/PercentageMath.sol';
@@ -170,10 +169,7 @@ library LiquidationLogic {
       })
     );
 
-    vars.liquidationBonus = vars
-      .collateralReserveCache
-      .reserveConfiguration
-      .getLiquidationBonus();
+    vars.liquidationBonus = vars.collateralReserveCache.reserveConfiguration.getLiquidationBonus();
     vars.collateralAssetPrice = IPriceOracleGetter(params.priceOracle).getAssetPrice(
       params.collateralAsset
     );
@@ -281,7 +277,6 @@ library LiquidationLogic {
     if (params.receiveAToken) {
       _liquidateATokens(reservesData, reservesList, usersConfig, collateralReserve, params, vars);
     } else {
-
       if (params.collateralAsset == params.debtAsset) {
         vars.collateralReserveCache.nextScaledVariableDebt = vars
           .debtReserveCache
@@ -292,13 +287,12 @@ library LiquidationLogic {
     }
 
     if (vars.liquidationProtocolFeeAmount != 0) {
-      
       uint256 scaledDownLiquidationProtocolFee = vars
         .liquidationProtocolFeeAmount
         .getATokenTransferScaledAmount(vars.collateralReserveCache.nextLiquidityIndex);
       uint256 scaledDownBorrowerBalance = IAToken(vars.collateralReserveCache.aTokenAddress)
         .scaledBalanceOf(params.borrower);
-      
+
       if (scaledDownLiquidationProtocolFee > scaledDownBorrowerBalance) {
         scaledDownLiquidationProtocolFee = scaledDownBorrowerBalance;
         vars.liquidationProtocolFeeAmount = scaledDownBorrowerBalance.getATokenBalance(

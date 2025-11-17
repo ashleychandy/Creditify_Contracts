@@ -6,16 +6,13 @@ import {IPool} from '../../../interfaces/IPool.sol';
 import {IncentivizedERC20} from './IncentivizedERC20.sol';
 
 abstract contract MintableIncentivizedERC20 is IncentivizedERC20 {
-  
   constructor(
     IPool pool,
     string memory name,
     string memory symbol,
     uint8 decimals,
     address rewardsController
-  ) IncentivizedERC20(pool, name, symbol, decimals, rewardsController) {
-    
-  }
+  ) IncentivizedERC20(pool, name, symbol, decimals, rewardsController) {}
 
   function _mint(address account, uint120 amount) internal virtual {
     uint256 oldTotalSupply = _totalSupply;

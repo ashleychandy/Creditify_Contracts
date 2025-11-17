@@ -11,7 +11,7 @@ abstract contract RewardsDistributor is IRewardsDistributor {
   using SafeCast for uint256;
 
   address public immutable EMISSION_MANAGER;
-  
+
   address internal _emissionManager;
 
   mapping(address => RewardsDataTypes.AssetData) internal _assets;
@@ -196,7 +196,6 @@ abstract contract RewardsDistributor is IRewardsDistributor {
   function _configureAssets(RewardsDataTypes.RewardsConfigInput[] memory rewardsInput) internal {
     for (uint256 i = 0; i < rewardsInput.length; i++) {
       if (_assets[rewardsInput[i].asset].decimals == 0) {
-        
         _assetsList.push(rewardsInput[i].asset);
       }
 
@@ -274,7 +273,6 @@ abstract contract RewardsDistributor is IRewardsDistributor {
     uint256 rewardsAccrued;
     bool dataUpdated;
     if ((dataUpdated = userIndex != newAssetIndex)) {
-      
       rewardData.usersData[user].index = uint104(newAssetIndex);
       if (userBalance != 0) {
         rewardsAccrued = _getRewards(userBalance, newAssetIndex, userIndex, assetUnit);
@@ -345,7 +343,6 @@ abstract contract RewardsDistributor is IRewardsDistributor {
     address reward,
     RewardsDataTypes.UserAssetBalance[] memory userAssetBalances
   ) internal view returns (uint256 unclaimedRewards) {
-    
     for (uint256 i = 0; i < userAssetBalances.length; i++) {
       if (userAssetBalances[i].userBalance == 0) {
         unclaimedRewards += _assets[userAssetBalances[i].asset]

@@ -108,7 +108,7 @@ contract CreditifyProtocolDataProvider is IPoolDataProvider {
   }
 
   function getSiloedBorrowing(address asset) external view override returns (bool) {
-    return false; 
+    return false;
   }
 
   function getLiquidationProtocolFee(address asset) external view override returns (uint256) {
@@ -120,11 +120,11 @@ contract CreditifyProtocolDataProvider is IPoolDataProvider {
   }
 
   function getDebtCeiling(address asset) external view override returns (uint256) {
-    return 0; 
+    return 0;
   }
 
   function getDebtCeilingDecimals() external pure override returns (uint256) {
-    return 0; 
+    return 0;
   }
 
   function getReserveData(
@@ -134,7 +134,7 @@ contract CreditifyProtocolDataProvider is IPoolDataProvider {
     view
     override
     returns (
-      uint256 ,
+      uint256,
       uint256 accruedToTreasuryScaled,
       uint256 totalAToken,
       uint256,
@@ -151,7 +151,7 @@ contract CreditifyProtocolDataProvider is IPoolDataProvider {
     DataTypes.ReserveDataLegacy memory reserve = POOL.getReserveData(asset);
 
     return (
-      0, 
+      0,
       reserve.accruedToTreasury,
       IERC20Detailed(reserve.aTokenAddress).totalSupply(),
       0,
@@ -221,7 +221,6 @@ contract CreditifyProtocolDataProvider is IPoolDataProvider {
       address variableDebtTokenAddress
     )
   {
-    
     return (POOL.getReserveAToken(asset), address(0), POOL.getReserveVariableDebtToken(asset));
   }
 

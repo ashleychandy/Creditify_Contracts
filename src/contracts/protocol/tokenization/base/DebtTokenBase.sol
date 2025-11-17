@@ -15,7 +15,6 @@ abstract contract DebtTokenBase is
   Context,
   ICreditDelegationToken
 {
-  
   mapping(address => mapping(address => uint256)) internal _borrowAllowances;
 
   bytes32 public constant DELEGATION_WITH_SIG_TYPEHASH =
@@ -23,9 +22,7 @@ abstract contract DebtTokenBase is
 
   address internal _underlyingAsset;
 
-  constructor() EIP712Base() {
-    
-  }
+  constructor() EIP712Base() {}
 
   function approveDelegation(address delegatee, uint256 amount) external override {
     _approveDelegation(_msgSender(), delegatee, amount);
@@ -41,7 +38,7 @@ abstract contract DebtTokenBase is
     bytes32 s
   ) external {
     require(delegator != address(0), Errors.ZeroAddressNotValid());
-    
+
     require(block.timestamp <= deadline, Errors.InvalidExpiration());
     uint256 currentValidNonce = _nonces[delegator];
     bytes32 digest = keccak256(

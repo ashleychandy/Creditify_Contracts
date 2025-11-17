@@ -14,7 +14,10 @@ library PriceFeedEngine {
     _setPriceFeeds(engineConstants.oracle, updates);
   }
 
-  function _setPriceFeeds(ICreditifyOracle oracle, IEngine.PriceFeedUpdate[] memory updates) internal {
+  function _setPriceFeeds(
+    ICreditifyOracle oracle,
+    IEngine.PriceFeedUpdate[] memory updates
+  ) internal {
     address[] memory assets = new address[](updates.length);
     address[] memory sources = new address[](updates.length);
 

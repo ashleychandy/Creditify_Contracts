@@ -5,7 +5,6 @@ import {IStakedToken} from '../interfaces/IStakedToken.sol';
 import {ITransferStrategyBase} from './ITransferStrategyBase.sol';
 
 interface IStakedTokenTransferStrategy is ITransferStrategyBase {
-  
   function renewApproval() external;
 
   function dropApproval() external;

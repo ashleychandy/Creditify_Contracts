@@ -50,7 +50,6 @@ contract RewardsController is RewardsDistributor, VersionedInitializable, IRewar
     RewardsDataTypes.RewardsConfigInput[] memory config
   ) external override onlyEmissionManager {
     for (uint256 i = 0; i < config.length; i++) {
-      
       config[i].totalSupply = IScaledBalanceToken(config[i].asset).scaledTotalSupply();
 
       _installTransferStrategy(config[i].reward, config[i].transferStrategy);
@@ -235,9 +234,8 @@ contract RewardsController is RewardsDistributor, VersionedInitializable, IRewar
   }
 
   function _isContract(address account) internal view returns (bool) {
-
     uint256 size;
-    
+
     assembly {
       size := extcodesize(account)
     }

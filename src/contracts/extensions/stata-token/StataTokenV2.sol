@@ -85,7 +85,6 @@ contract StataTokenV2 is
     override(IERC20Metadata, ERC20Upgradeable, ERC4626Upgradeable)
     returns (uint8)
   {
-
     return ERC4626Upgradeable.decimals();
   }
 

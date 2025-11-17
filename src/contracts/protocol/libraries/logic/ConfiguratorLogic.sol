@@ -20,7 +20,6 @@ library ConfiguratorLogic {
     IPool pool,
     ConfiguratorInputTypes.InitReserveInput calldata input
   ) external {
-    
     uint8 underlyingAssetDecimals = IERC20Detailed(input.underlyingAsset).decimals();
     require(underlyingAssetDecimals > 5, Errors.InvalidDecimals());
 

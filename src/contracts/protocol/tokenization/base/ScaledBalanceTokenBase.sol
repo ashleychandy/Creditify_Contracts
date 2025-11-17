@@ -18,9 +18,7 @@ abstract contract ScaledBalanceTokenBase is MintableIncentivizedERC20, IScaledBa
     string memory symbol,
     uint8 decimals,
     address rewardsController
-  ) MintableIncentivizedERC20(pool, name, symbol, decimals, rewardsController) {
-    
-  }
+  ) MintableIncentivizedERC20(pool, name, symbol, decimals, rewardsController) {}
 
   function scaledBalanceOf(address user) external view override returns (uint256) {
     return super.balanceOf(user);

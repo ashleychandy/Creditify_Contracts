@@ -5,7 +5,6 @@ import {IPriceOracleGetter} from './IPriceOracleGetter.sol';
 import {IPoolAddressesProvider} from './IPoolAddressesProvider.sol';
 
 interface ICreditifyOracle is IPriceOracleGetter {
-  
   event BaseCurrencySet(address indexed baseCurrency, uint256 baseCurrencyUnit);
 
   event AssetSourceUpdated(address indexed asset, address indexed source);

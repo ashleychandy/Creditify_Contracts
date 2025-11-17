@@ -8,7 +8,6 @@ contract InitializableAdminUpgradeabilityProxy is
   BaseAdminUpgradeabilityProxy,
   InitializableUpgradeabilityProxy
 {
-  
   function initialize(address logic, address admin, bytes memory data) public payable {
     require(_implementation() == address(0));
     InitializableUpgradeabilityProxy.initialize(logic, data);

@@ -5,7 +5,6 @@ import {IScaledBalanceToken} from './IScaledBalanceToken.sol';
 import {IInitializableDebtToken} from './IInitializableDebtToken.sol';
 
 interface IVariableDebtToken is IScaledBalanceToken, IInitializableDebtToken {
-  
   function mint(
     address user,
     address onBehalfOf,

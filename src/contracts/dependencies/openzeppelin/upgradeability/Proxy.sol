@@ -2,7 +2,6 @@
 pragma solidity ^0.8.10;
 
 abstract contract Proxy {
-  
   fallback() external payable {
     _fallback();
   }
@@ -14,9 +13,7 @@ abstract contract Proxy {
   function _implementation() internal view virtual returns (address);
 
   function _delegate(address implementation) internal {
-    
     assembly {
-
       calldatacopy(0, 0, calldatasize())
 
       let result := delegatecall(gas(), implementation, 0, calldatasize(), 0, 0)
@@ -24,7 +21,6 @@ abstract contract Proxy {
       returndatacopy(0, 0, returndatasize())
 
       switch result
-      
       case 0 {
         revert(0, returndatasize())
       }

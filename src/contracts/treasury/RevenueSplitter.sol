@@ -15,18 +15,9 @@ contract RevenueSplitter is IRevenueSplitter, ReentrancyGuard {
   address payable public immutable RECIPIENT_B;
   uint16 public immutable SPLIT_PERCENTAGE_RECIPIENT_A;
 
-  event RevenueSplit(
-    address indexed token,
-    uint256 totalAmount,
-    uint256 amountA,
-    uint256 amountB
-  );
+  event RevenueSplit(address indexed token, uint256 totalAmount, uint256 amountA, uint256 amountB);
 
-  constructor(
-    address recipientA,
-    address recipientB,
-    uint16 splitPercentageRecipientA
-  ) {
+  constructor(address recipientA, address recipientB, uint16 splitPercentageRecipientA) {
     if (recipientA == address(0) || recipientB == address(0)) {
       revert InvalidPercentSplit();
     }

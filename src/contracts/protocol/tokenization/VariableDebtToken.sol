@@ -32,9 +32,7 @@ abstract contract VariableDebtToken is DebtTokenBase, ScaledBalanceTokenBase, IV
       0,
       rewardsController
     )
-  {
-    
-  }
+  {}
 
   function initialize(
     IPool initializingPool,
@@ -62,7 +60,6 @@ abstract contract VariableDebtToken is DebtTokenBase, ScaledBalanceTokenBase, IV
     uint256 scaledBalanceOfUser = super.balanceOf(user);
 
     if (user != onBehalfOf) {
-
       _decreaseBorrowAllowance(
         onBehalfOf,
         user,

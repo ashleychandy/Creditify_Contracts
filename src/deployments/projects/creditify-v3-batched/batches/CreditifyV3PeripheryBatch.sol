@@ -30,7 +30,7 @@ contract CreditifyV3PeripheryBatch is
 
       _report.treasury = treasuryReport.treasury;
       _report.treasuryImplementation = treasuryReport.treasuryImplementation;
-      
+
       _report.dustBin = treasuryReport.dustBin;
       _report.emptyImplementation = treasuryReport.emptyImplementation;
     } else {

@@ -30,7 +30,6 @@ library ReserveLogic {
     uint40 timestamp = reserve.lastUpdateTimestamp;
 
     if (timestamp == block.timestamp) {
-      
       return reserve.liquidityIndex;
     } else {
       return
@@ -46,7 +45,6 @@ library ReserveLogic {
     uint40 timestamp = reserve.lastUpdateTimestamp;
 
     if (timestamp == block.timestamp) {
-      
       return reserve.variableBorrowIndex;
     } else {
       return
@@ -60,7 +58,6 @@ library ReserveLogic {
     DataTypes.ReserveData storage reserve,
     DataTypes.ReserveCache memory reserveCache
   ) internal {
-
     if (reserveCache.reserveLastUpdateTimestamp == uint40(block.timestamp)) {
       return;
     }
@@ -156,7 +153,6 @@ library ReserveLogic {
     DataTypes.ReserveData storage reserve,
     DataTypes.ReserveCache memory reserveCache
   ) internal {
-
     if (reserveCache.currLiquidityRate != 0) {
       uint256 cumulatedLiquidityInterest = MathUtils.calculateLinearInterest(
         reserveCache.currLiquidityRate,

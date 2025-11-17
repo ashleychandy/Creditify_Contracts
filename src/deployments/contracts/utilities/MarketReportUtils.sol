@@ -17,7 +17,9 @@ library MarketReportUtils {
     contractsReport.poolConfiguratorImplementation = IPoolConfigurator(
       report.poolConfiguratorImplementation
     );
-    contractsReport.protocolDataProvider = CreditifyProtocolDataProvider(report.protocolDataProvider);
+    contractsReport.protocolDataProvider = CreditifyProtocolDataProvider(
+      report.protocolDataProvider
+    );
     contractsReport.creditifyOracle = ICreditifyOracle(report.creditifyOracle);
     contractsReport.aclManager = IACLManager(report.aclManager);
     contractsReport.treasury = ICollector(report.treasury);

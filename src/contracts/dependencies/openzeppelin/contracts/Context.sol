@@ -7,7 +7,7 @@ abstract contract Context {
   }
 
   function _msgData() internal view virtual returns (bytes memory) {
-    this; 
+    this;
     return msg.data;
   }
 }

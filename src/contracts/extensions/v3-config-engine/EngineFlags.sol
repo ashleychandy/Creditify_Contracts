@@ -2,7 +2,6 @@
 pragma solidity ^0.8.18;
 
 library EngineFlags {
-
   uint256 internal constant KEEP_CURRENT = type(uint256).max - 42;
 
   string internal constant KEEP_CURRENT_STRING = 'KEEP_CURRENT_STRING';

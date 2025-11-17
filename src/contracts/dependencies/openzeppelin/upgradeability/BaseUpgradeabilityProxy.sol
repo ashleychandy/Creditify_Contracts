@@ -5,7 +5,6 @@ import './Proxy.sol';
 import '../contracts/Address.sol';
 
 contract BaseUpgradeabilityProxy is Proxy {
-  
   event Upgraded(address indexed implementation);
 
   bytes32 internal constant IMPLEMENTATION_SLOT =
@@ -13,7 +12,7 @@ contract BaseUpgradeabilityProxy is Proxy {
 
   function _implementation() internal view override returns (address impl) {
     bytes32 slot = IMPLEMENTATION_SLOT;
-    
+
     assembly {
       impl := sload(slot)
     }

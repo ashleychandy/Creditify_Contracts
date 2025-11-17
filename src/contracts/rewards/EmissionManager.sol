@@ -9,7 +9,6 @@ import {IRewardsController} from './interfaces/IRewardsController.sol';
 import {RewardsDataTypes} from './libraries/RewardsDataTypes.sol';
 
 contract EmissionManager is Ownable, IEmissionManager {
-  
   mapping(address => address) internal _emissionAdmins;
 
   IRewardsController internal _rewardsController;

@@ -76,7 +76,11 @@ contract MetadataReporter is IMetadataReporter {
     );
     vm.serializeAddress(jsonReport, 'transparentProxyFactory', report.transparentProxyFactory);
 
-    string memory output = vm.serializeAddress(jsonReport, 'transparentProxyFactory', report.transparentProxyFactory);
+    string memory output = vm.serializeAddress(
+      jsonReport,
+      'transparentProxyFactory',
+      report.transparentProxyFactory
+    );
 
     vm.writeJson(output, string.concat('./reports/', timestamp, '-market-deployment.json'));
   }
@@ -92,7 +96,11 @@ contract MetadataReporter is IMetadataReporter {
 
     vm.serializeAddress(jsonReport, 'borrowLogic', libraries.borrowLogic);
 
-    string memory output = vm.serializeAddress(jsonReport, 'configuratorLogic', libraries.configuratorLogic);
+    string memory output = vm.serializeAddress(
+      jsonReport,
+      'configuratorLogic',
+      libraries.configuratorLogic
+    );
 
     vm.writeJson(output, string.concat('./reports/', timestamp, '-library-1-deployment.json'));
   }

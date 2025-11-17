@@ -20,7 +20,6 @@ library SafeERC20 {
   }
 
   function safeApprove(IERC20 token, address spender, uint256 value) internal {
-
     require(
       (value == 0) || (token.allowance(address(this), spender) == 0),
       'SafeERC20: approve from non-zero to non-zero allowance'
@@ -49,10 +48,8 @@ library SafeERC20 {
   }
 
   function _callOptionalReturn(IERC20 token, bytes memory data) private {
-
     bytes memory returndata = address(token).functionCall(data, 'SafeERC20: low-level call failed');
     if (returndata.length > 0) {
-      
       require(abi.decode(returndata, (bool)), 'SafeERC20: ERC20 operation did not succeed');
     }
   }

@@ -151,7 +151,7 @@ library ListingEngine {
         interestRateData: abi.encode(rates[i]),
         underlyingAsset: ids[i],
         aTokenName: string.concat('Creditify ', context.networkName, ' ', basics[i].assetSymbol),
-        aTokenSymbol: string.concat('a', context.networkAbbreviation, basics[i].assetSymbol),
+        aTokenSymbol: string.concat('c', context.networkAbbreviation, basics[i].assetSymbol),
         variableDebtTokenName: string.concat(
           'Creditify ',
           context.networkName,

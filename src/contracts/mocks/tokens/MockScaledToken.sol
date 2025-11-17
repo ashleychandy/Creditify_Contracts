@@ -10,9 +10,7 @@ contract MockScaledToken is ScaledBalanceTokenBase {
   constructor(
     IPool pool,
     address rewardsController
-  ) ScaledBalanceTokenBase(pool, 'A', 'A', 6, rewardsController) {
-    
-  }
+  ) ScaledBalanceTokenBase(pool, 'A', 'A', 6, rewardsController) {}
 
   function setStorage(
     address alice,

@@ -9,7 +9,6 @@ import {StataTokenV2} from './StataTokenV2.sol';
 import {IStataTokenFactory} from './interfaces/IStataTokenFactory.sol';
 
 contract StataTokenFactory is Initializable, IStataTokenFactory {
-  
   IPool public immutable POOL;
 
   address public immutable INITIAL_OWNER;

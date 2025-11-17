@@ -94,7 +94,7 @@ contract WrappedTokenGatewayV3 is IWrappedTokenGatewayV3, Ownable {
     if (amount == type(uint256).max) {
       amountToWithdraw = userBalance;
     }
-    
+
     try
       aWETH.permit(msg.sender, address(this), amount, deadline, permitV, permitR, permitS)
     {} catch {}

@@ -61,18 +61,18 @@ contract UiPoolDataProviderV3 is IUiPoolDataProviderV3 {
       DataTypes.ReserveDataLegacy memory baseData = pool.getReserveData(
         reserveData.underlyingAsset
       );
-      
+
       reserveData.liquidityIndex = baseData.liquidityIndex;
-      
+
       reserveData.variableBorrowIndex = baseData.variableBorrowIndex;
-      
+
       reserveData.liquidityRate = baseData.currentLiquidityRate;
-      
+
       reserveData.variableBorrowRate = baseData.currentVariableBorrowRate;
       reserveData.lastUpdateTimestamp = baseData.lastUpdateTimestamp;
       reserveData.aTokenAddress = baseData.aTokenAddress;
       reserveData.variableDebtTokenAddress = baseData.variableDebtTokenAddress;
-      
+
       reserveData.interestRateStrategyAddress = baseData.interestRateStrategyAddress;
       reserveData.priceInMarketReferenceCurrency = oracle.getAssetPrice(
         reserveData.underlyingAsset
@@ -123,8 +123,8 @@ contract UiPoolDataProviderV3 is IUiPoolDataProviderV3 {
       } catch {}
 
       reserveData.deficit = uint128(pool.getReserveDeficit(reserveData.underlyingAsset));
-      reserveData.debtCeiling = 0; 
-      reserveData.debtCeilingDecimals = 0; 
+      reserveData.debtCeiling = 0;
+      reserveData.debtCeilingDecimals = 0;
       (reserveData.borrowCap, reserveData.supplyCap) = reserveConfigurationMap.getCaps();
 
       reserveData.accruedToTreasury = baseData.accruedToTreasury;
@@ -142,7 +142,7 @@ contract UiPoolDataProviderV3 is IUiPoolDataProviderV3 {
     try oracle.BASE_CURRENCY_UNIT() returns (uint256 baseCurrencyUnit) {
       baseCurrencyInfo.marketReferenceCurrencyUnit = baseCurrencyUnit;
       baseCurrencyInfo.marketReferenceCurrencyPriceInUsd = int256(baseCurrencyUnit);
-    } catch (bytes memory ) {
+    } catch (bytes memory) {
       baseCurrencyInfo.marketReferenceCurrencyUnit = ETH_CURRENCY_UNIT;
       baseCurrencyInfo
         .marketReferenceCurrencyPriceInUsd = marketReferenceCurrencyPriceInUsdProxyAggregator

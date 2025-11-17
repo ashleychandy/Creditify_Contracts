@@ -7,12 +7,8 @@ import '../../../interfaces/IMarketReportTypes.sol';
 contract CreditifyV3MiscBatch is CreditifyV3MiscProcedure {
   MiscReport internal _report;
 
-  constructor(
-    address poolAddressesProvider
-  ) {
-    MiscReport memory miscReport = _deployDefaultIR(
-      poolAddressesProvider
-    );
+  constructor(address poolAddressesProvider) {
+    MiscReport memory miscReport = _deployDefaultIR(poolAddressesProvider);
     _report.defaultInterestRateStrategy = miscReport.defaultInterestRateStrategy;
   }
 

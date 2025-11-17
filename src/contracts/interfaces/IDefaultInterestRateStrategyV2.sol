@@ -5,7 +5,6 @@ import {IReserveInterestRateStrategy} from './IReserveInterestRateStrategy.sol';
 import {IPoolAddressesProvider} from './IPoolAddressesProvider.sol';
 
 interface IDefaultInterestRateStrategyV2 is IReserveInterestRateStrategy {
-  
   struct InterestRateData {
     uint16 optimalUsageRatio;
     uint32 baseVariableBorrowRate;

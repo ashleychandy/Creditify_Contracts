@@ -120,7 +120,6 @@ library BorrowLogic {
 
     uint256 paybackAmount = params.amount;
     if (params.useATokens && params.amount == type(uint256).max) {
-      
       paybackAmount = IAToken(reserveCache.aTokenAddress)
         .scaledBalanceOf(params.user)
         .getATokenBalance(reserveCache.nextLiquidityIndex);
@@ -152,7 +151,6 @@ library BorrowLogic {
     }
 
     if (params.useATokens) {
-      
       bool zeroBalanceAfterBurn = IAToken(reserveCache.aTokenAddress).burn({
         from: params.user,
         receiverOfUnderlying: reserveCache.aTokenAddress,

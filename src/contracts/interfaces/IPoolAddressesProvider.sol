@@ -2,7 +2,6 @@
 pragma solidity ^0.8.0;
 
 interface IPoolAddressesProvider {
-  
   event MarketIdSet(string indexed oldMarketId, string indexed newMarketId);
 
   event PoolUpdated(address indexed oldAddress, address indexed newAddress);

@@ -9,10 +9,7 @@ contract InitializableImmutableAdminUpgradeabilityProxy is
   BaseImmutableAdminUpgradeabilityProxy,
   InitializableUpgradeabilityProxy
 {
-  
-  constructor(address admin) BaseImmutableAdminUpgradeabilityProxy(admin) {
-    
-  }
+  constructor(address admin) BaseImmutableAdminUpgradeabilityProxy(admin) {}
 
   function _willFallback() internal override(BaseImmutableAdminUpgradeabilityProxy, Proxy) {
     BaseImmutableAdminUpgradeabilityProxy._willFallback();

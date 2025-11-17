@@ -45,7 +45,6 @@ abstract contract FfiUtils {
   }
 
   function _deleteLibrariesPath() internal {
-    
     string memory deleteCommand = "sed -i.bak -r '/FOUNDRY_LIBRARIES/d' .env && rm .env.bak";
     string[] memory delCommand = new string[](3);
 

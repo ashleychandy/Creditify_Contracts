@@ -147,7 +147,7 @@ abstract contract AToken is VersionedInitializable, ScaledBalanceTokenBase, EIP7
     bytes32 s
   ) external override {
     require(owner != address(0), Errors.ZeroAddressNotValid());
-    
+
     require(block.timestamp <= deadline, Errors.InvalidExpiration());
     uint256 currentValidNonce = _nonces[owner];
     bytes32 digest = keccak256(
@@ -173,7 +173,6 @@ abstract contract AToken is VersionedInitializable, ScaledBalanceTokenBase, EIP7
       sender,
       _msgSender(),
       amount,
-
       scaledBalanceOfSender.getATokenBalance(index) -
         (scaledBalanceOfSender - amount.getATokenTransferScaledAmount(index)).getATokenBalance(
           index

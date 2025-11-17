@@ -6,7 +6,6 @@ import {IPoolAddressesProvider} from '../../interfaces/IPoolAddressesProvider.so
 import {InitializableImmutableAdminUpgradeabilityProxy} from '../../misc/creditify-upgradeability/InitializableImmutableAdminUpgradeabilityProxy.sol';
 
 contract PoolAddressesProvider is Ownable, IPoolAddressesProvider {
-  
   string private _marketId;
 
   mapping(bytes32 => address) private _addresses;

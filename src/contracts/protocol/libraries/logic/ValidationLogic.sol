@@ -88,9 +88,7 @@ library ValidationLogic {
     bool borrowingEnabled;
   }
 
-  function validateBorrow(
-    DataTypes.ValidateBorrowParams memory params
-  ) internal view {
+  function validateBorrow(DataTypes.ValidateBorrowParams memory params) internal view {
     require(params.amountScaled != 0, Errors.InvalidAmount());
 
     ValidateBorrowLocalVars memory vars;

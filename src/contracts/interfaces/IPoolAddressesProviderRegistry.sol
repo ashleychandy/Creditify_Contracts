@@ -2,7 +2,6 @@
 pragma solidity ^0.8.0;
 
 interface IPoolAddressesProviderRegistry {
-  
   event AddressesProviderRegistered(address indexed addressesProvider, uint256 indexed id);
 
   event AddressesProviderUnregistered(address indexed addressesProvider, uint256 indexed id);

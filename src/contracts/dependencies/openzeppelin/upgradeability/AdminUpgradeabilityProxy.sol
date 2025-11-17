@@ -4,7 +4,6 @@ pragma solidity ^0.8.10;
 import './BaseAdminUpgradeabilityProxy.sol';
 
 contract AdminUpgradeabilityProxy is BaseAdminUpgradeabilityProxy, UpgradeabilityProxy {
-  
   constructor(
     address _logic,
     address _admin,

@@ -13,7 +13,7 @@ abstract contract ERC20CreditifyLMUpgradeable is ERC20Upgradeable, IERC20Crediti
   using SafeCast for uint256;
 
   struct ERC20CreditifyLMStorage {
-    address _referenceAsset; 
+    address _referenceAsset;
     address[] _rewardTokens;
     mapping(address reward => RewardIndexCache cache) _startIndex;
     mapping(address user => mapping(address reward => UserRewardsData cache)) _userRewardsData;

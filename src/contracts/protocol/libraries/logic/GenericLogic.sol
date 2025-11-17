@@ -92,7 +92,8 @@ library GenericLogic {
             }
 
             vars.avgLiquidationThreshold +=
-              vars.userBalanceInBaseCurrency * vars.liquidationThreshold;
+              vars.userBalanceInBaseCurrency *
+              vars.liquidationThreshold;
           }
 
           if (isBorrowed) {

@@ -39,7 +39,7 @@ contract UiIncentiveDataProviderV3 is IUiIncentiveDataProviderV3 {
     address[] memory reserves = pool.getReservesList();
     AggregatedReserveIncentiveData[]
       memory reservesIncentiveData = new AggregatedReserveIncentiveData[](reserves.length);
-    
+
     for (uint256 i = 0; i < reserves.length; i++) {
       AggregatedReserveIncentiveData memory reserveIncentiveData = reservesIncentiveData[i];
       reserveIncentiveData.underlyingAsset = reserves[i];
@@ -182,7 +182,6 @@ contract UiIncentiveDataProviderV3 is IUiIncentiveDataProviderV3 {
         address(IncentivizedERC20(baseData.aTokenAddress).getIncentivesController())
       );
       if (address(aTokenIncentiveController) != address(0)) {
-        
         address[] memory aTokenRewardAddresses = aTokenIncentiveController.getRewardsByAsset(
           baseData.aTokenAddress
         );
@@ -233,7 +232,6 @@ contract UiIncentiveDataProviderV3 is IUiIncentiveDataProviderV3 {
         address(IncentivizedERC20(baseData.variableDebtTokenAddress).getIncentivesController())
       );
       if (address(vTokenIncentiveController) != address(0)) {
-        
         address[] memory vTokenRewardAddresses = vTokenIncentiveController.getRewardsByAsset(
           baseData.variableDebtTokenAddress
         );

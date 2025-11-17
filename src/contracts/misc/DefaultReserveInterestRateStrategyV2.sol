@@ -113,9 +113,7 @@ contract DefaultReserveInterestRateStrategyV2 is IDefaultInterestRateStrategyV2 
 
       vars.availableLiquidityPlusDebt = vars.availableLiquidity + params.totalDebt;
       vars.borrowUsageRatio = params.totalDebt.rayDiv(vars.availableLiquidityPlusDebt);
-      vars.supplyUsageRatio = params.totalDebt.rayDiv(
-        vars.availableLiquidityPlusDebt
-      );
+      vars.supplyUsageRatio = params.totalDebt.rayDiv(vars.availableLiquidityPlusDebt);
     } else {
       return (0, vars.currentVariableBorrowRate);
     }

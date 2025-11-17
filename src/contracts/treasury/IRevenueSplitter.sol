@@ -8,7 +8,6 @@ interface IRevenueSplitterErrors {
 }
 
 interface IRevenueSplitter is IRevenueSplitterErrors {
-
   function splitRevenue(IERC20[] memory tokens) external;
 
   function splitNativeRevenue() external;

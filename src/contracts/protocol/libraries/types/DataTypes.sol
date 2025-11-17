@@ -2,78 +2,46 @@
 pragma solidity ^0.8.0;
 
 library DataTypes {
-  
   struct ReserveDataLegacy {
-    
     ReserveConfigurationMap configuration;
-    
     uint128 liquidityIndex;
-    
     uint128 currentLiquidityRate;
-    
     uint128 variableBorrowIndex;
-    
     uint128 currentVariableBorrowRate;
-    
     uint128 currentStableBorrowRate;
-    
     uint40 lastUpdateTimestamp;
-    
     uint16 id;
-    
     address aTokenAddress;
-    
     address stableDebtTokenAddress;
-    
     address variableDebtTokenAddress;
-    
     address interestRateStrategyAddress;
-    
     uint128 accruedToTreasury;
   }
 
   struct ReserveData {
-    
     ReserveConfigurationMap configuration;
-    
     uint128 liquidityIndex;
-    
     uint128 currentLiquidityRate;
-    
     uint128 variableBorrowIndex;
-    
     uint128 currentVariableBorrowRate;
-
     uint128 deficit;
-    
     uint40 lastUpdateTimestamp;
-    
     uint16 id;
-    
     uint40 liquidationGracePeriodUntil;
-    
     address aTokenAddress;
-    
     address __deprecatedStableDebtTokenAddress;
-    
     address variableDebtTokenAddress;
-    
     address __deprecatedInterestRateStrategyAddress;
-    
     uint128 accruedToTreasury;
-    
     uint128 virtualUnderlyingBalance;
-
     uint128 __deprecatedVirtualUnderlyingBalance;
   }
 
   struct ReserveConfigurationMap {
-
     uint256 data;
   }
 
   struct UserConfigurationMap {
-    
     uint256 data;
   }
 
@@ -198,7 +166,6 @@ library DataTypes {
     uint256 totalDebt;
     uint256 reserveFactor;
     address reserve;
-    
     bool usingVirtualBalance;
     uint256 virtualUnderlyingBalance;
   }

@@ -50,7 +50,6 @@ abstract contract ERC4626StataTokenUpgradeable is ERC4626Upgradeable, IERC4626St
   function __ERC4626StataToken_init_unchained(
     address newAToken
   ) internal onlyInitializing returns (IERC20) {
-    
     address poolOfAToken = IAToken(newAToken).POOL();
     if (poolOfAToken != address(POOL)) revert PoolAddressMismatch(poolOfAToken);
 
@@ -65,7 +64,6 @@ abstract contract ERC4626StataTokenUpgradeable is ERC4626Upgradeable, IERC4626St
   }
 
   function depositATokens(uint256 assets, address receiver) external returns (uint256) {
-    
     uint256 actualUserBalance = IERC20(aToken()).balanceOf(_msgSender());
     if (assets > actualUserBalance) {
       assets = actualUserBalance;
@@ -170,7 +168,7 @@ abstract contract ERC4626StataTokenUpgradeable is ERC4626Upgradeable, IERC4626St
 
     uint256 supplyCap = ReserveConfiguration.getSupplyCap(reserveData.configuration) *
       (10 ** ReserveConfiguration.getDecimals(reserveData.configuration));
-    
+
     if (supplyCap == 0) return type(uint256).max;
 
     uint256 currentSupply = (IAToken(reserveData.aTokenAddress).scaledTotalSupply() +
@@ -181,7 +179,7 @@ abstract contract ERC4626StataTokenUpgradeable is ERC4626Upgradeable, IERC4626St
   function latestAnswer() external view returns (int256) {
     uint256 aTokenUnderlyingAssetPrice = ICreditifyOracle(POOL_ADDRESSES_PROVIDER.getPriceOracle())
       .getAssetPrice(asset());
-    
+
     return int256(aTokenUnderlyingAssetPrice.mulDiv(_rate(), RAY, Math.Rounding.Floor));
   }
 
@@ -255,7 +253,6 @@ abstract contract ERC4626StataTokenUpgradeable is ERC4626Upgradeable, IERC4626St
     uint256 assets,
     Math.Rounding rounding
   ) internal view virtual override returns (uint256) {
-    
     return assets.mulDiv(RAY, _rate(), rounding);
   }
 
@@ -263,7 +260,6 @@ abstract contract ERC4626StataTokenUpgradeable is ERC4626Upgradeable, IERC4626St
     uint256 shares,
     Math.Rounding rounding
   ) internal view virtual override returns (uint256) {
-    
     return shares.mulDiv(_rate(), RAY, rounding);
   }
 

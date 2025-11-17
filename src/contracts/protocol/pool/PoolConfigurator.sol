@@ -100,13 +100,11 @@ abstract contract PoolConfigurator is VersionedInitializable, IPoolConfigurator 
     uint256 liquidationThreshold,
     uint256 liquidationBonus
   ) external override onlyRiskOrPoolAdmins {
-
     require(ltv <= liquidationThreshold, Errors.InvalidReserveParams());
 
     DataTypes.ReserveConfigurationMap memory currentConfig = _pool.getConfiguration(asset);
 
     if (liquidationThreshold != 0) {
-
       require(liquidationBonus > PercentageMath.PERCENTAGE_FACTOR, Errors.InvalidReserveParams());
 
       require(
@@ -205,7 +203,6 @@ abstract contract PoolConfigurator is VersionedInitializable, IPoolConfigurator 
   }
 
   function disableLiquidationGracePeriod(address asset) external override onlyEmergencyOrPoolAdmin {
-    
     _pool.setLiquidationGracePeriod(asset, 0);
 
     emit LiquidationGracePeriodDisabled(asset);

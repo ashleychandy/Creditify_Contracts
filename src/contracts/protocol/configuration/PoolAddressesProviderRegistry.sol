@@ -6,13 +6,12 @@ import {Errors} from '../libraries/helpers/Errors.sol';
 import {IPoolAddressesProviderRegistry} from '../../interfaces/IPoolAddressesProviderRegistry.sol';
 
 contract PoolAddressesProviderRegistry is Ownable, IPoolAddressesProviderRegistry {
-  
   mapping(address => uint256) private _addressesProviderToId;
-  
+
   mapping(uint256 => address) private _idToAddressesProvider;
-  
+
   address[] private _addressesProvidersList;
-  
+
   mapping(address => uint256) private _addressesProvidersIndexes;
 
   constructor(address owner) {

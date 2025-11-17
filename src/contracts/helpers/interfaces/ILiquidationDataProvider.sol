@@ -5,7 +5,6 @@ import {IPoolAddressesProvider} from '../../interfaces/IPoolAddressesProvider.so
 import {IPool} from '../../interfaces/IPool.sol';
 
 interface ILiquidationDataProvider {
-
   struct UserPositionFullInfo {
     uint256 totalCollateralInBaseCurrency;
     uint256 totalDebtInBaseCurrency;

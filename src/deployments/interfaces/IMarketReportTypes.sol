@@ -98,13 +98,13 @@ struct MarketConfig {
   bytes32 salt;
   address wrappedNativeToken;
   address incentivesProxy;
-  address treasury; 
-  address treasuryPartner; 
-  uint16 treasurySplitPercent; 
+  address treasury;
+  address treasuryPartner;
+  uint16 treasurySplitPercent;
 }
 
 struct DeployFlags {
-  bool placeholder; 
+  bool placeholder;
 }
 
 struct PoolReport {

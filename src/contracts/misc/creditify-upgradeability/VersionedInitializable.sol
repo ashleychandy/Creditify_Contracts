@@ -2,9 +2,7 @@
 pragma solidity ^0.8.10;
 
 abstract contract VersionedInitializable {
-  
   constructor() {
-    
     lastInitializedRevision = getRevision();
   }
 
@@ -35,9 +33,8 @@ abstract contract VersionedInitializable {
   function getRevision() internal pure virtual returns (uint256);
 
   function isConstructor() private view returns (bool) {
-
     uint256 cs;
-    
+
     assembly {
       cs := extcodesize(address())
     }

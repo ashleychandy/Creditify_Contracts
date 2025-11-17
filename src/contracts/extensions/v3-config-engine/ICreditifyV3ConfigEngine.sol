@@ -46,15 +46,15 @@ interface ICreditifyV3ConfigEngine {
     address asset;
     string assetSymbol;
     address priceFeed;
-    InterestRateInputData rateStrategyParams; 
+    InterestRateInputData rateStrategyParams;
     uint256 enabledToBorrow;
-    uint256 ltv; 
-    uint256 liqThreshold; 
-    uint256 liqBonus; 
-    uint256 reserveFactor; 
-    uint256 supplyCap; 
-    uint256 borrowCap; 
-    uint256 liqProtocolFee; 
+    uint256 ltv;
+    uint256 liqThreshold;
+    uint256 liqBonus;
+    uint256 reserveFactor;
+    uint256 supplyCap;
+    uint256 borrowCap;
+    uint256 liqProtocolFee;
   }
 
   struct RepackedListings {
@@ -79,8 +79,8 @@ interface ICreditifyV3ConfigEngine {
 
   struct CapsUpdate {
     address asset;
-    uint256 supplyCap; 
-    uint256 borrowCap; 
+    uint256 supplyCap;
+    uint256 borrowCap;
   }
 
   struct PriceFeedUpdate {

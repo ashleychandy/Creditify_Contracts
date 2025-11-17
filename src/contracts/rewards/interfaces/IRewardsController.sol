@@ -7,7 +7,6 @@ import {AggregatorInterface} from '../../dependencies/chainlink/AggregatorInterf
 import {RewardsDataTypes} from '../libraries/RewardsDataTypes.sol';
 
 interface IRewardsController is IRewardsDistributor {
-  
   event ClaimerSet(address indexed user, address indexed claimer);
 
   event RewardsClaimed(

@@ -33,7 +33,7 @@ abstract contract IncentivizedERC20 is Context, IERC20Detailed {
     uint120 balance;
     uint128 additionalData;
   }
-  
+
   mapping(address => UserState) internal _userState;
 
   mapping(address => mapping(address => uint256)) private _allowances;
@@ -42,11 +42,11 @@ abstract contract IncentivizedERC20 is Context, IERC20Detailed {
   string private _name;
   string private _symbol;
   uint8 private _decimals;
-  
+
   ICreditifyIncentivesController internal __deprecated_incentivesController;
   IPoolAddressesProvider internal immutable _addressesProvider;
   IPool public immutable POOL;
-  
+
   ICreditifyIncentivesController public immutable REWARDS_CONTROLLER;
 
   constructor(
@@ -84,7 +84,12 @@ abstract contract IncentivizedERC20 is Context, IERC20Detailed {
     return _userState[account].balance;
   }
 
-  function getIncentivesController() external view virtual returns (ICreditifyIncentivesController) {
+  function getIncentivesController()
+    external
+    view
+    virtual
+    returns (ICreditifyIncentivesController)
+  {
     return REWARDS_CONTROLLER;
   }
 

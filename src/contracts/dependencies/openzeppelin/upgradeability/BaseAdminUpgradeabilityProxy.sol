@@ -4,7 +4,6 @@ pragma solidity ^0.8.10;
 import './UpgradeabilityProxy.sol';
 
 contract BaseAdminUpgradeabilityProxy is BaseUpgradeabilityProxy {
-  
   event AdminChanged(address previousAdmin, address newAdmin);
 
   bytes32 internal constant ADMIN_SLOT =
@@ -47,7 +46,7 @@ contract BaseAdminUpgradeabilityProxy is BaseUpgradeabilityProxy {
 
   function _admin() internal view returns (address adm) {
     bytes32 slot = ADMIN_SLOT;
-    
+
     assembly {
       adm := sload(slot)
     }
@@ -55,7 +54,7 @@ contract BaseAdminUpgradeabilityProxy is BaseUpgradeabilityProxy {
 
   function _setAdmin(address newAdmin) internal {
     bytes32 slot = ADMIN_SLOT;
-    
+
     assembly {
       sstore(slot, newAdmin)
     }

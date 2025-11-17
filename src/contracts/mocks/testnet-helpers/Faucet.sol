@@ -6,7 +6,6 @@ import {TestnetERC20} from './TestnetERC20.sol';
 import {IFaucet} from './IFaucet.sol';
 
 contract Faucet is IFaucet, Ownable {
-
   bool internal _permissioned;
 
   uint256 public constant MAX_MINT_AMOUNT = 10000;

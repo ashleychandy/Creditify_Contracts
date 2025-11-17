@@ -43,7 +43,6 @@ library BorrowEngine {
       if (updates[i].reserveFactor != EngineFlags.KEEP_CURRENT) {
         poolConfigurator.setReserveFactor(updates[i].asset, updates[i].reserveFactor);
       }
-
     }
   }
 }

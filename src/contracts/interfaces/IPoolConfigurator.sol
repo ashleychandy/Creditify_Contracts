@@ -5,7 +5,6 @@ import {ConfiguratorInputTypes} from '../protocol/libraries/types/ConfiguratorIn
 import {IDefaultInterestRateStrategyV2} from './IDefaultInterestRateStrategyV2.sol';
 
 interface IPoolConfigurator {
-  
   event ReserveInitialized(
     address indexed asset,
     address indexed aToken,

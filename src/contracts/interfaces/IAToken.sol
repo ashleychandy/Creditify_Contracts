@@ -6,7 +6,6 @@ import {IScaledBalanceToken} from './IScaledBalanceToken.sol';
 import {IInitializableAToken} from './IInitializableAToken.sol';
 
 interface IAToken is IERC20, IScaledBalanceToken, IInitializableAToken {
-  
   event BalanceTransfer(address indexed from, address indexed to, uint256 value, uint256 index);
 
   function mint(

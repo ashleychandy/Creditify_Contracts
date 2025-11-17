@@ -4,7 +4,6 @@ pragma solidity ^0.8.10;
 import {WETH9} from '../../dependencies/weth/WETH9.sol';
 
 contract WETH9Mocked is WETH9 {
-  
   function mint(uint256 value) public returns (bool) {
     balanceOf[msg.sender] += value;
     emit Transfer(address(0), msg.sender, value);

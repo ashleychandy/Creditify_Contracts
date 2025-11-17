@@ -56,13 +56,11 @@ library CollateralEngine {
           }
 
           if (updates[i].liqBonus == EngineFlags.KEEP_CURRENT) {
-            
             updates[i].liqBonus = currentLiqBonus - 100_00;
           }
         }
 
         if (notAllKeepCurrent) {
-          
           require(
             updates[i].liqThreshold.percentMul(100_00 + updates[i].liqBonus) <= 100_00,
             'INVALID_LT_LB_RATIO'
@@ -72,7 +70,6 @@ library CollateralEngine {
             updates[i].asset,
             updates[i].ltv,
             updates[i].liqThreshold,
-
             100_00 + updates[i].liqBonus
           );
         }
@@ -81,7 +78,6 @@ library CollateralEngine {
           require(updates[i].liqProtocolFee < 100_00, 'INVALID_LIQ_PROTOCOL_FEE');
           poolConfigurator.setLiquidationProtocolFee(updates[i].asset, updates[i].liqProtocolFee);
         }
-
       }
     }
   }

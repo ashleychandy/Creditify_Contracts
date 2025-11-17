@@ -1,5 +1,3 @@
-
-
 pragma solidity ^0.8.10;
 
 contract WETH9 {
@@ -61,4 +59,3 @@ contract WETH9 {
     return true;
   }
 }
-

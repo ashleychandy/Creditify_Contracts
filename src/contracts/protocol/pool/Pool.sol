@@ -233,14 +233,7 @@ abstract contract Pool is VersionedInitializable, PoolStorage, IPool, Multicall 
         useATokens: false,
         oracle: ADDRESSES_PROVIDER.getPriceOracle()
       });
-      return
-        BorrowLogic.executeRepay(
-          _reserves,
-          _reservesList,
-          
-          _usersConfig[onBehalfOf],
-          params
-        );
+      return BorrowLogic.executeRepay(_reserves, _reservesList, _usersConfig[onBehalfOf], params);
     }
   }
 
@@ -430,7 +423,6 @@ abstract contract Pool is VersionedInitializable, PoolStorage, IPool, Multicall 
     SupplyLogic.executeFinalizeTransfer(
       _reserves,
       _reservesList,
-      
       _usersConfig,
       DataTypes.FinalizeTransferParams({
         asset: asset,

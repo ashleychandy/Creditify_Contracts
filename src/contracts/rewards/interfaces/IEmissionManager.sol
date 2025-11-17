@@ -7,7 +7,6 @@ import {ITransferStrategyBase} from './ITransferStrategyBase.sol';
 import {IRewardsController} from './IRewardsController.sol';
 
 interface IEmissionManager {
-  
   event EmissionAdminUpdated(
     address indexed reward,
     address indexed oldAdmin,
