@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
 
-import {WETH9} from '../../dependencies/weth/WETH9.sol';
+import {WXDC9} from '../../dependencies/wxdc/WXDC9.sol';
 
-contract WETH9Mocked is WETH9 {
+contract WXDC9Mocked is WXDC9 {
   function mint(uint256 value) public returns (bool) {
     balanceOf[msg.sender] += value;
     emit Transfer(address(0), msg.sender, value);

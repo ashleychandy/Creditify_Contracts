@@ -1,22 +1,22 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
-import {IWETH} from '../interfaces/IWETH.sol';
+import {IWXDC} from '../interfaces/IWXDC.sol';
 import {IPool} from '../../interfaces/IPool.sol';
 
 interface IWrappedTokenGatewayV3 {
-  function WETH() external view returns (IWETH);
+  function WXDC() external view returns (IWXDC);
 
   function POOL() external view returns (IPool);
 
-  function depositETH(address pool, address onBehalfOf, uint16 referralCode) external payable;
+  function depositXDC(address pool, address onBehalfOf, uint16 referralCode) external payable;
 
-  function withdrawETH(address pool, uint256 amount, address onBehalfOf) external;
+  function withdrawXDC(address pool, uint256 amount, address onBehalfOf) external;
 
-  function repayETH(address pool, uint256 amount, address onBehalfOf) external payable;
+  function repayXDC(address pool, uint256 amount, address onBehalfOf) external payable;
 
-  function borrowETH(address pool, uint256 amount, uint16 referralCode) external;
+  function borrowXDC(address pool, uint256 amount, uint16 referralCode) external;
 
-  function withdrawETHWithPermit(
+  function withdrawXDCWithPermit(
     address pool,
     uint256 amount,
     address to,

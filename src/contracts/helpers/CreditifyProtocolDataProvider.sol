@@ -18,7 +18,7 @@ contract CreditifyProtocolDataProvider is IPoolDataProvider {
   using WadRayMath for uint256;
 
   address constant MKR = 0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2;
-  address constant ETH = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
+  address constant XDC = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
 
   IPoolAddressesProvider public immutable ADDRESSES_PROVIDER;
 
@@ -41,8 +41,8 @@ contract CreditifyProtocolDataProvider is IPoolDataProvider {
         reservesTokens[i] = TokenData({symbol: 'MKR', tokenAddress: reserves[i]});
         continue;
       }
-      if (reserves[i] == ETH) {
-        reservesTokens[i] = TokenData({symbol: 'ETH', tokenAddress: reserves[i]});
+      if (reserves[i] == XDC) {
+        reservesTokens[i] = TokenData({symbol: 'XDC', tokenAddress: reserves[i]});
         continue;
       }
       reservesTokens[i] = TokenData({

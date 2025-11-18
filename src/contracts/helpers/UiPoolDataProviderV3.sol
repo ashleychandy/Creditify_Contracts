@@ -24,7 +24,7 @@ contract UiPoolDataProviderV3 is IUiPoolDataProviderV3 {
 
   AggregatorInterface public immutable networkBaseTokenPriceInUsdProxyAggregator;
   AggregatorInterface public immutable marketReferenceCurrencyPriceInUsdProxyAggregator;
-  uint256 public constant ETH_CURRENCY_UNIT = 1 ether;
+  uint256 public constant XDC_CURRENCY_UNIT = 1 ether;
   address public constant MKR_ADDRESS = 0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2;
 
   constructor(
@@ -143,7 +143,7 @@ contract UiPoolDataProviderV3 is IUiPoolDataProviderV3 {
       baseCurrencyInfo.marketReferenceCurrencyUnit = baseCurrencyUnit;
       baseCurrencyInfo.marketReferenceCurrencyPriceInUsd = int256(baseCurrencyUnit);
     } catch (bytes memory) {
-      baseCurrencyInfo.marketReferenceCurrencyUnit = ETH_CURRENCY_UNIT;
+      baseCurrencyInfo.marketReferenceCurrencyUnit = XDC_CURRENCY_UNIT;
       baseCurrencyInfo
         .marketReferenceCurrencyPriceInUsd = marketReferenceCurrencyPriceInUsdProxyAggregator
         .latestAnswer();
