@@ -1,58 +1,42 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import {IPoolAddressesProvider} from './IPoolAddressesProvider.sol';
+import {IPoolAddressesProvider} from "./IPoolAddressesProvider.sol";
 
 interface IACLManager {
-  function ADDRESSES_PROVIDER() external view returns (IPoolAddressesProvider);
+    function ADDRESSES_PROVIDER() external view returns (IPoolAddressesProvider);
 
-  function POOL_ADMIN_ROLE() external view returns (bytes32);
+    function POOL_ADMIN_ROLE() external view returns (bytes32);
 
-  function EMERGENCY_ADMIN_ROLE() external view returns (bytes32);
+    function EMERGENCY_ADMIN_ROLE() external view returns (bytes32);
 
-  function RISK_ADMIN_ROLE() external view returns (bytes32);
+    function RISK_ADMIN_ROLE() external view returns (bytes32);
 
-  function FLASH_BORROWER_ROLE() external view returns (bytes32);
+    function ASSET_LISTING_ADMIN_ROLE() external view returns (bytes32);
 
-  function BRIDGE_ROLE() external view returns (bytes32);
+    function setRoleAdmin(bytes32 role, bytes32 adminRole) external;
 
-  function ASSET_LISTING_ADMIN_ROLE() external view returns (bytes32);
+    function addPoolAdmin(address admin) external;
 
-  function setRoleAdmin(bytes32 role, bytes32 adminRole) external;
+    function removePoolAdmin(address admin) external;
 
-  function addPoolAdmin(address admin) external;
+    function isPoolAdmin(address admin) external view returns (bool);
 
-  function removePoolAdmin(address admin) external;
+    function addEmergencyAdmin(address admin) external;
 
-  function isPoolAdmin(address admin) external view returns (bool);
+    function removeEmergencyAdmin(address admin) external;
 
-  function addEmergencyAdmin(address admin) external;
+    function isEmergencyAdmin(address admin) external view returns (bool);
 
-  function removeEmergencyAdmin(address admin) external;
+    function addRiskAdmin(address admin) external;
 
-  function isEmergencyAdmin(address admin) external view returns (bool);
+    function removeRiskAdmin(address admin) external;
 
-  function addRiskAdmin(address admin) external;
+    function isRiskAdmin(address admin) external view returns (bool);
 
-  function removeRiskAdmin(address admin) external;
+    function addAssetListingAdmin(address admin) external;
 
-  function isRiskAdmin(address admin) external view returns (bool);
+    function removeAssetListingAdmin(address admin) external;
 
-  function addFlashBorrower(address borrower) external;
-
-  function removeFlashBorrower(address borrower) external;
-
-  function isFlashBorrower(address borrower) external view returns (bool);
-
-  function addBridge(address bridge) external;
-
-  function removeBridge(address bridge) external;
-
-  function isBridge(address bridge) external view returns (bool);
-
-  function addAssetListingAdmin(address admin) external;
-
-  function removeAssetListingAdmin(address admin) external;
-
-  function isAssetListingAdmin(address admin) external view returns (bool);
+    function isAssetListingAdmin(address admin) external view returns (bool);
 }

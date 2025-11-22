@@ -1,117 +1,94 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import {IPoolAddressesProvider} from './IPoolAddressesProvider.sol';
-import {IPool} from './IPool.sol';
+import {IPoolAddressesProvider} from "./IPoolAddressesProvider.sol";
+import {IPool} from "./IPool.sol";
 
 interface IPoolDataProvider {
-  struct TokenData {
-    string symbol;
-    address tokenAddress;
-  }
+    struct TokenData {
+        string symbol;
+        address tokenAddress;
+    }
 
-  function ADDRESSES_PROVIDER() external view returns (IPoolAddressesProvider);
+    function ADDRESSES_PROVIDER() external view returns (IPoolAddressesProvider);
 
-  function POOL() external view returns (IPool);
+    function POOL() external view returns (IPool);
 
-  function getAllReservesTokens() external view returns (TokenData[] memory);
+    function getAllReservesTokens() external view returns (TokenData[] memory);
 
-  function getAllATokens() external view returns (TokenData[] memory);
+    function getAllATokens() external view returns (TokenData[] memory);
 
-  function getReserveConfigurationData(
-    address asset
-  )
-    external
-    view
-    returns (
-      uint256 decimals,
-      uint256 ltv,
-      uint256 liquidationThreshold,
-      uint256 liquidationBonus,
-      uint256 reserveFactor,
-      bool usageAsCollateralEnabled,
-      bool borrowingEnabled,
-      bool stableBorrowRateEnabled,
-      bool isActive,
-      bool isFrozen
-    );
+    function getReserveConfigurationData(address asset)
+        external
+        view
+        returns (
+            uint256 decimals,
+            uint256 ltv,
+            uint256 liquidationThreshold,
+            uint256 liquidationBonus,
+            uint256 reserveFactor,
+            bool usageAsCollateralEnabled,
+            bool borrowingEnabled,
+            bool stableBorrowRateEnabled,
+            bool isActive,
+            bool isFrozen
+        );
 
-  function getReserveCaps(
-    address asset
-  ) external view returns (uint256 borrowCap, uint256 supplyCap);
+    function getReserveCaps(address asset) external view returns (uint256 borrowCap, uint256 supplyCap);
 
-  function getPaused(address asset) external view returns (bool isPaused);
+    function getPaused(address asset) external view returns (bool isPaused);
 
-  function getSiloedBorrowing(address asset) external view returns (bool);
+    function getLiquidationProtocolFee(address asset) external view returns (uint256);
 
-  function getLiquidationProtocolFee(address asset) external view returns (uint256);
+    function getUnbackedMintCap(address asset) external view returns (uint256);
 
-  function getUnbackedMintCap(address asset) external view returns (uint256);
+    function getReserveData(address asset)
+        external
+        view
+        returns (
+            uint256 unbacked,
+            uint256 accruedToTreasuryScaled,
+            uint256 totalAToken,
+            uint256 totalStableDebt,
+            uint256 totalVariableDebt,
+            uint256 liquidityRate,
+            uint256 variableBorrowRate,
+            uint256 stableBorrowRate,
+            uint256 averageStableBorrowRate,
+            uint256 liquidityIndex,
+            uint256 variableBorrowIndex,
+            uint40 lastUpdateTimestamp
+        );
 
-  function getDebtCeiling(address asset) external view returns (uint256);
+    function getATokenTotalSupply(address asset) external view returns (uint256);
 
-  function getDebtCeilingDecimals() external pure returns (uint256);
+    function getTotalDebt(address asset) external view returns (uint256);
 
-  function getReserveData(
-    address asset
-  )
-    external
-    view
-    returns (
-      uint256 unbacked,
-      uint256 accruedToTreasuryScaled,
-      uint256 totalAToken,
-      uint256 totalStableDebt,
-      uint256 totalVariableDebt,
-      uint256 liquidityRate,
-      uint256 variableBorrowRate,
-      uint256 stableBorrowRate,
-      uint256 averageStableBorrowRate,
-      uint256 liquidityIndex,
-      uint256 variableBorrowIndex,
-      uint40 lastUpdateTimestamp
-    );
+    function getUserReserveData(address asset, address user)
+        external
+        view
+        returns (
+            uint256 currentATokenBalance,
+            uint256 currentStableDebt,
+            uint256 currentVariableDebt,
+            uint256 principalStableDebt,
+            uint256 scaledVariableDebt,
+            uint256 stableBorrowRate,
+            uint256 liquidityRate,
+            uint40 stableRateLastUpdated,
+            bool usageAsCollateralEnabled
+        );
 
-  function getATokenTotalSupply(address asset) external view returns (uint256);
+    function getReserveTokensAddresses(address asset)
+        external
+        view
+        returns (address aTokenAddress, address stableDebtTokenAddress, address variableDebtTokenAddress);
 
-  function getTotalDebt(address asset) external view returns (uint256);
+    function getInterestRateStrategyAddress(address asset) external view returns (address irStrategyAddress);
 
-  function getUserReserveData(
-    address asset,
-    address user
-  )
-    external
-    view
-    returns (
-      uint256 currentATokenBalance,
-      uint256 currentStableDebt,
-      uint256 currentVariableDebt,
-      uint256 principalStableDebt,
-      uint256 scaledVariableDebt,
-      uint256 stableBorrowRate,
-      uint256 liquidityRate,
-      uint40 stableRateLastUpdated,
-      bool usageAsCollateralEnabled
-    );
+    function getIsVirtualAccActive(address asset) external view returns (bool);
 
-  function getReserveTokensAddresses(
-    address asset
-  )
-    external
-    view
-    returns (
-      address aTokenAddress,
-      address stableDebtTokenAddress,
-      address variableDebtTokenAddress
-    );
+    function getVirtualUnderlyingBalance(address asset) external view returns (uint256);
 
-  function getInterestRateStrategyAddress(
-    address asset
-  ) external view returns (address irStrategyAddress);
-
-  function getIsVirtualAccActive(address asset) external view returns (bool);
-
-  function getVirtualUnderlyingBalance(address asset) external view returns (uint256);
-
-  function getReserveDeficit(address asset) external view returns (uint256);
+    function getReserveDeficit(address asset) external view returns (uint256);
 }

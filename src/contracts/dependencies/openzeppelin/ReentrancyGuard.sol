@@ -3,26 +3,26 @@
 pragma solidity ^0.8.0;
 
 abstract contract ReentrancyGuard {
-  uint256 private constant _NOT_ENTERED = 1;
-  uint256 private constant _ENTERED = 2;
+    uint256 private constant _NOT_ENTERED = 1;
+    uint256 private constant _ENTERED = 2;
 
-  uint256 private _status;
+    uint256 private _status;
 
-  constructor() {
-    _status = _NOT_ENTERED;
-  }
+    constructor() {
+        _status = _NOT_ENTERED;
+    }
 
-  modifier nonReentrant() {
-    require(_status != _ENTERED, 'ReentrancyGuard: reentrant call');
+    modifier nonReentrant() {
+        require(_status != _ENTERED, "ReentrancyGuard: reentrant call");
 
-    _status = _ENTERED;
+        _status = _ENTERED;
 
-    _;
+        _;
 
-    _status = _NOT_ENTERED;
-  }
+        _status = _NOT_ENTERED;
+    }
 
-  function _initGuard() internal {
-    _status = _NOT_ENTERED;
-  }
+    function _initGuard() internal {
+        _status = _NOT_ENTERED;
+    }
 }

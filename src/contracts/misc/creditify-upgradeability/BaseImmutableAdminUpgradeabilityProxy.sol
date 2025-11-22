@@ -1,46 +1,43 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
 
-import {BaseUpgradeabilityProxy} from '../../dependencies/openzeppelin/upgradeability/BaseUpgradeabilityProxy.sol';
+import {BaseUpgradeabilityProxy} from "../../dependencies/openzeppelin/upgradeability/BaseUpgradeabilityProxy.sol";
 
 contract BaseImmutableAdminUpgradeabilityProxy is BaseUpgradeabilityProxy {
-  address internal immutable _admin;
+    address internal immutable _admin;
 
-  constructor(address admin_) {
-    _admin = admin_;
-  }
-
-  modifier ifAdmin() {
-    if (msg.sender == _admin) {
-      _;
-    } else {
-      _fallback();
+    constructor(address admin_) {
+        _admin = admin_;
     }
-  }
 
-  function admin() external ifAdmin returns (address) {
-    return _admin;
-  }
+    modifier ifAdmin() {
+        if (msg.sender == _admin) {
+            _;
+        } else {
+            _fallback();
+        }
+    }
 
-  function implementation() external ifAdmin returns (address) {
-    return _implementation();
-  }
+    function admin() external ifAdmin returns (address) {
+        return _admin;
+    }
 
-  function upgradeTo(address newImplementation) external ifAdmin {
-    _upgradeTo(newImplementation);
-  }
+    function implementation() external ifAdmin returns (address) {
+        return _implementation();
+    }
 
-  function upgradeToAndCall(
-    address newImplementation,
-    bytes calldata data
-  ) external payable ifAdmin {
-    _upgradeTo(newImplementation);
-    (bool success, ) = newImplementation.delegatecall(data);
-    require(success);
-  }
+    function upgradeTo(address newImplementation) external ifAdmin {
+        _upgradeTo(newImplementation);
+    }
 
-  function _willFallback() internal virtual override {
-    require(msg.sender != _admin, 'Cannot call fallback function from the proxy admin');
-    super._willFallback();
-  }
+    function upgradeToAndCall(address newImplementation, bytes calldata data) external payable ifAdmin {
+        _upgradeTo(newImplementation);
+        (bool success,) = newImplementation.delegatecall(data);
+        require(success);
+    }
+
+    function _willFallback() internal virtual override {
+        require(msg.sender != _admin, "Cannot call fallback function from the proxy admin");
+        super._willFallback();
+    }
 }

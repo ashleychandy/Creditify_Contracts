@@ -1,68 +1,60 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import {Ownable} from '../../../../contracts/dependencies/openzeppelin/contracts/Ownable.sol';
-import {CreditifyV3SetupProcedure} from '../../../contracts/procedures/CreditifyV3SetupProcedure.sol';
-import '../../../contracts/MarketReportStorage.sol';
+import {Ownable} from "../../../../contracts/dependencies/openzeppelin/contracts/Ownable.sol";
+import {CreditifyV3SetupProcedure} from "../../../contracts/procedures/CreditifyV3SetupProcedure.sol";
+import "../../../contracts/MarketReportStorage.sol";
 
 contract CreditifyV3SetupBatch is MarketReportStorage, CreditifyV3SetupProcedure, Ownable {
-  InitialReport internal _initialReport;
-  SetupReport internal _setupReport;
+    InitialReport internal _initialReport;
+    SetupReport internal _setupReport;
 
-  constructor(
-    address owner,
-    Roles memory roles,
-    MarketConfig memory config,
-    MarketReport memory deployedContracts
-  ) {
-    transferOwnership(owner);
+    constructor(address owner, Roles memory roles, MarketConfig memory config, MarketReport memory deployedContracts) {
+        transferOwnership(owner);
 
-    _initialReport = _initialDeployment(
-      deployedContracts.poolAddressesProviderRegistry,
-      roles.marketOwner,
-      config.marketId,
-      config.providerId
-    );
-  }
+        _initialReport = _initialDeployment(
+            deployedContracts.poolAddressesProviderRegistry, roles.marketOwner, config.marketId, config.providerId
+        );
+    }
 
-  function setupCreditifyV3Market(
-    Roles memory roles,
-    MarketConfig memory config,
-    address poolImplementation,
-    address poolConfiguratorImplementation,
-    address creditifyOracle,
-    address rewardsControllerImplementation
-  ) external onlyOwner returns (SetupReport memory) {
-    _setupReport = _setupCreditifyV3Market(
-      roles,
-      config,
-      _initialReport,
-      poolImplementation,
-      poolConfiguratorImplementation,
-      creditifyOracle,
-      rewardsControllerImplementation
-    );
+    function setupCreditifyV3Market(
+        Roles memory roles,
+        MarketConfig memory config,
+        address poolImplementation,
+        address poolConfiguratorImplementation,
+        address creditifyOracle,
+        address rewardsControllerImplementation
+    ) external onlyOwner returns (SetupReport memory) {
+        _setupReport = _setupCreditifyV3Market(
+            roles,
+            config,
+            _initialReport,
+            poolImplementation,
+            poolConfiguratorImplementation,
+            creditifyOracle,
+            rewardsControllerImplementation
+        );
 
-    return _setupReport;
-  }
+        return _setupReport;
+    }
 
-  function setMarketReport(MarketReport memory marketReport) external onlyOwner {
-    _marketReport = marketReport;
-  }
+    function setMarketReport(MarketReport memory marketReport) external onlyOwner {
+        _marketReport = marketReport;
+    }
 
-  function setProtocolDataProvider(address protocolDataProvider) external onlyOwner {
-    _setProtocolDataProvider(_initialReport, protocolDataProvider);
-  }
+    function setProtocolDataProvider(address protocolDataProvider) external onlyOwner {
+        _setProtocolDataProvider(_initialReport, protocolDataProvider);
+    }
 
-  function transferMarketOwnership(Roles memory roles) external onlyOwner {
-    _transferMarketOwnership(roles, _initialReport);
-  }
+    function transferMarketOwnership(Roles memory roles) external onlyOwner {
+        _transferMarketOwnership(roles, _initialReport);
+    }
 
-  function getInitialReport() external view returns (InitialReport memory) {
-    return _initialReport;
-  }
+    function getInitialReport() external view returns (InitialReport memory) {
+        return _initialReport;
+    }
 
-  function getSetupReport() external view returns (SetupReport memory) {
-    return _setupReport;
-  }
+    function getSetupReport() external view returns (SetupReport memory) {
+        return _setupReport;
+    }
 }
